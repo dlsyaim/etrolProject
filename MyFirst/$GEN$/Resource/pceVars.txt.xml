@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\Resource.PCD">
+	<XMLVarListGenerator version="6.2.0"/>
+	<VarList>
+		<var name="BUTTON" path="BLINKER_ST" type="1" size="1" program="1" segment="1" offset="6" bit="0" scope="1" qualifier="0" ref="0" procimg="%I0.0" />
+		<var name="BLINKER" path="BLINKER_ST" type="1" size="1" program="1" segment="1" offset="14" bit="0" scope="1" qualifier="0" ref="0" procimg="%Q0.0" />
+		<var name="IN" path="BLINKER_ST.TIMER" type="1" size="1" program="1" segment="13" offset="11" bit="0" scope="2" qualifier="0" ref="0" procimg="noPI" />
+		<var name="PT" path="BLINKER_ST.TIMER" type="12" size="4" program="1" segment="13" offset="12" bit="0" scope="2" qualifier="0" ref="0" procimg="noPI" />
+		<var name="Q" path="BLINKER_ST.TIMER" type="1" size="1" program="1" segment="13" offset="6" bit="0" scope="2" qualifier="0" ref="0" procimg="noPI" />
+		<var name="ET" path="BLINKER_ST.TIMER" type="12" size="4" program="1" segment="13" offset="7" bit="0" scope="2" qualifier="0" ref="0" procimg="noPI" />
+	</VarList>
+</Project>

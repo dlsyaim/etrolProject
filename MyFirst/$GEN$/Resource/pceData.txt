@@ -1,0 +1,103 @@
+
+Program Nr: 2:
+Nr 10: Datasegment
+06 00 01 06 0B 00 
+
+Nr 11: Codesegment
+07 00 00 06 0C 00 07 
+
+    IntelFormat
+      Die Parameterwerte der Funktionen
+      werden im Motorola-Format angezeigt.
+    ByteSize = 1.
+
+    6:     7  RET            
+
+Nr 12: Initialsegment
+10 00 02 10 0B 00 00 00 00 00 00 00 00 00 00 00 
+
+Nr 13: Instancetable
+0E 00 14 08 00 00 01 00 06 00 0A 00 0C 00 
+
+Nr 14: Downloadtable
+26 00 16 08 00 00 01 00 03 00 00 00 00 00 00 00 
+00 00 36 00 00 00 0C 00 0A 00 0B 00 00 00 07 4D 
+59 46 49 52 53 54 
+
+
+Program Nr: 1:
+Nr 10: Datasegment
+12 00 01 06 0B 00 0D 00 09 00 01 00 06 00 01 00 
+0E 00 
+
+Nr 11: Codesegment
+42 00 00 06 0C 00 22 D0 07 00 00 3C 06 00 0C 00 
+14 0A 00 39 06 00 0B 00 04 06 00 0F 06 00 06 00 
+03 37 00 14 0E 00 FC 01 3E 0E 00 1F 39 06 00 0B 
+00 04 06 00 01 37 00 14 0E 00 70 0A 00 97 3E 0E 
+00 07 
+
+    IntelFormat
+      Die Parameterwerte der Funktionen
+      werden im Motorola-Format angezeigt.
+    ByteSize = 1.
+
+    6:    34  LD_CONST_4      00 00  07 D0
+    b:    60  ST_FAR_4        00 06  00 0C
+   10:    20  LD_BYREF_BIT    00 0A
+   13:    57  ST_FAR_BIT      00 06  00 0B
+   18:     4  CAL             00 06
+   1b:    15  LD_FAR_BIT      00 06  00 06
+   20:     3  JMPCN           00 37
+   23:    20  LD_BYREF_BIT    00 0E
+   26:     1  NOT_BIT        
+   28:    62  ST_BYREF_BIT    00 0E
+   2b:    31  LD_CONST_FALSE 
+   2c:    57  ST_FAR_BIT      00 06  00 0B
+   31:     4  CAL             00 06
+   34:     1  JMP             00 37
+   37:    20  LD_BYREF_BIT    00 0E
+   3a:   112  LDS_BYREF_BIT   00 0A
+   3d:   151  AND_BIT        
+   3e:    62  ST_BYREF_BIT    00 0E
+   41:     7  RET            
+
+Nr 12: Initialsegment
+10 00 02 10 0B 00 00 00 00 00 0C 00 00 00 00 00 
+
+Nr 13: Datasegment
+19 00 01 06 0E 00 00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 
+
+Nr 14: Codesegment
+07 00 00 06 0F 00 07 
+
+    IntelFormat
+      Die Parameterwerte der Funktionen
+      werden im Motorola-Format angezeigt.
+    ByteSize = 1.
+
+    6:     7  RET            
+
+Nr 15: Initialsegment
+23 00 02 10 0E 00 0A 00 00 00 00 00 09 00 00 00 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+00 00 00 
+
+Nr 16: Instancetable
+20 00 14 08 00 00 02 00 12 00 0A 00 0C 00 0D 00 
+09 00 01 00 06 00 01 00 0E 00 06 00 0D 00 0F 00 
+
+Nr 17: Downloadtable
+4C 00 16 08 00 00 02 00 03 00 C6 E0 00 00 00 00 
+00 00 0A 31 00 00 0C 00 0A 00 0B 00 00 00 0A 42 
+4C 49 4E 4B 45 52 5F 53 54 BC 0E 00 00 00 00 00 
+00 36 00 00 00 0F 00 00 00 0E 00 00 00 03 54 4F 
+4E 01 00 0D 00 05 00 54 49 4D 45 52 
+
+
+Program Nr: 0:
+Nr 9: SegHardwareConfig
+12 00 24 06 CD CD 08 00 08 00 00 04 06 00 0E 00 
+16 00 
+

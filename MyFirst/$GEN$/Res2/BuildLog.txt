@@ -1,0 +1,7 @@
+
+正在构建资源 D:\git\etrolProject\MyFirst\$ENV$\Res2\Res2.MAK。
+正在执行预生成步骤:
+删除D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Res2\BuildLog.txt
+没有任务在资源Res2中定义。
+总数:
+0 错误(s) 0 警告(s)

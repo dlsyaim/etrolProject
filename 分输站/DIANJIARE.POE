@@ -1,0 +1,1126 @@
+PROGRAM DIANJIARE
+VAR_EXTERNAL
+
+END_VAR
+
+VAR_GLOBAL
+
+END_VAR
+
+VAR
+blinker AT %Q0.0 	:	BOOL;
+blinker2 AT %Q0.1 	:	BOOL;
+blinker3 AT %Q0.2   :   BOOL;
+blinker4 AT %Q0.3   :   BOOL;
+blinker5 AT %Q0.4   :   BOOL;
+blinker6 AT %Q0.5   :   BOOL;
+blinker7 AT %Q0.6   :   BOOL;
+blinker8 AT %Q0.7   :   BOOL;
+blinker9 AT %Q1.0   :   BOOL;
+blinker10 AT %Q1.1   :   BOOL;
+blinker11 AT %Q1.2   :   BOOL;
+blinker12 AT %Q1.3   :   BOOL;
+blinker13 AT %Q1.4   :   BOOL;
+jtbutton : uint;
+sgbj : uint;
+i : uint;
+j : uint;
+kdw : uint;
+gdw :uint;
+kdw2 : uint;
+gdw2 :uint;
+kdw3 : uint;
+gdw3 :uint;
+kdw4 : uint;
+gdw4 :uint;
+jt_gdw1 : uint;
+jt_gdw2 : uint;
+jt_kdw1 : uint;
+jt_kdw2 : uint;
+addr_val : uint;
+wds_val : REAL;
+wdx_val : REAL;
+wd_val : REAL;
+par_var : uint;
+lock_var : uint;
+jf_open : uint;
+jf_close : uint;
+jf2_open : uint;
+jf2_close : uint;
+jf3_open : uint;
+jf3_close : uint;
+jf4_open : uint;
+jf4_close : uint;
+szd_var : uint;
+REG_W_UINT_VAR : REG_W_UINT;
+REG_R_UINT_VAR : REG_R_UINT;
+REG_MOVE_VAR   : REG_MOVE;
+REG_R_REAL_VAL : REG_R_REAL;
+REG_W_REAL_VAL : REG_W_REAL;
+END_VAR
+
+(*Automatically declared*)
+VAR_EXTERNAL
+END_VAR
+(**  **)
+(** REG_R_UINT_VAR(ADDR := 10018); **)
+	(* call - Stmt *)
+	CAL REG_R_UINT_VAR (
+		ADDR := 10018
+	)
+
+(** jtbutton := REG_R_UINT_VAR.DATA; **)
+	(* assign - Stmt *)
+	LD REG_R_UINT_VAR.DATA
+	ST jtbutton
+
+(** {*急停未按下，阀门操作*} **)
+(** IF jtbutton=0 THEN **)
+	(* if - Cond *)
+	LD jtbutton
+	EQ 0
+	JMPCN ODK_SKIP_000000000000001_000000000000001
+
+		(* then - Stmts *)
+
+(** 	blinker3 := TRUE; **)
+		(* assign - Stmt *)
+		LD TRUE
+		ST blinker3
+
+(** 	blinker9 := FALSE; **)
+		(* assign - Stmt *)
+		LD FALSE
+		ST blinker9
+
+(** 	blinker12 := FALSE; **)
+		(* assign - Stmt *)
+		LD FALSE
+		ST blinker12
+
+(** 	{*判断进站气液联动阀是否已修改*} **)
+(** 	REG_R_UINT_VAR(ADDR := 40074); **)
+		(* call - Stmt *)
+		CAL REG_R_UINT_VAR (
+			ADDR := 40074
+		)
+
+(** 	par_var := REG_R_UINT_VAR.DATA; **)
+		(* assign - Stmt *)
+		LD REG_R_UINT_VAR.DATA
+		ST par_var
+
+(** 	IF par_var=1 THEN **)
+		(* if - Cond *)
+		LD par_var
+		EQ 1
+		JMPCN ODK_SKIP_000000000000002_000000000000001
+
+			(* then - Stmts *)
+
+(** 	{*参数修改*} **)
+(** 		REG_W_UINT_VAR(ADDR := 40074, DATA := 0); **)
+			(* call - Stmt *)
+			CAL REG_W_UINT_VAR (
+				ADDR := 40074,
+				DATA := 0
+			)
+
+(** 		REG_R_UINT_VAR(ADDR := 40071); **)
+			(* call - Stmt *)
+			CAL REG_R_UINT_VAR (
+				ADDR := 40071
+			)
+
+(** 		jf_open := REG_R_UINT_VAR.DATA; **)
+			(* assign - Stmt *)
+			LD REG_R_UINT_VAR.DATA
+			ST jf_open
+
+(** 		IF jf_open=1 THEN **)
+			(* if - Cond *)
+			LD jf_open
+			EQ 1
+			JMPCN ODK_SKIP_000000000000003_000000000000001
+
+				(* then - Stmts *)
+
+(** 			blinker := TRUE; **)
+				(* assign - Stmt *)
+				LD TRUE
+				ST blinker
+
+				JMP ODK_END_IF_000000000000003
+
+(** 		ELSE  **)
+			(* else *) 
+			ODK_SKIP_000000000000003_000000000000001:
+
+				(* else - Stmts *)
+
+(** 			blinker := FALSE; **)
+				(* assign - Stmt *)
+				LD FALSE
+				ST blinker
+
+(** 		 **)
+(** 		END_IF; **)
+			(* if - End *) 
+			ODK_END_IF_000000000000003:
+
+(** 	 **)
+(** 		REG_R_UINT_VAR(ADDR := 40072); **)
+			(* call - Stmt *)
+			CAL REG_R_UINT_VAR (
+				ADDR := 40072
+			)
+
+(** 		jf_close := REG_R_UINT_VAR.DATA; **)
+			(* assign - Stmt *)
+			LD REG_R_UINT_VAR.DATA
+			ST jf_close
+
+(** 		IF jf_close=1 THEN **)
+			(* if - Cond *)
+			LD jf_close
+			EQ 1
+			JMPCN ODK_SKIP_000000000000004_000000000000001
+
+				(* then - Stmts *)
+
+(** 			blinker2 := TRUE; **)
+				(* assign - Stmt *)
+				LD TRUE
+				ST blinker2
+
+				JMP ODK_END_IF_000000000000004
+
+(** 		ELSE  **)
+			(* else *) 
+			ODK_SKIP_000000000000004_000000000000001:
+
+				(* else - Stmts *)
+
+(** 			blinker2 := FALSE; **)
+				(* assign - Stmt *)
+				LD FALSE
+				ST blinker2
+
+(** 		END_IF; **)
+			(* if - End *) 
+			ODK_END_IF_000000000000004:
+
+			JMP ODK_END_IF_000000000000002
+
+(** 	ELSE **)
+		(* else *) 
+		ODK_SKIP_000000000000002_000000000000001:
+
+			(* else - Stmts *)
+
+(** 	{*参数未修改*} **)
+(** 		; **)
+(** 	END_IF; **)
+		(* if - End *) 
+		ODK_END_IF_000000000000002:
+
+(**   **)
+(** 	REG_R_UINT_VAR(ADDR := 10003); **)
+		(* call - Stmt *)
+		CAL REG_R_UINT_VAR (
+			ADDR := 10003
+		)
+
+(** 	kdw := REG_R_UINT_VAR.DATA; **)
+		(* assign - Stmt *)
+		LD REG_R_UINT_VAR.DATA
+		ST kdw
+
+(** 	IF kdw=1 THEN **)
+		(* if - Cond *)
+		LD kdw
+		EQ 1
+		JMPCN ODK_SKIP_000000000000005_000000000000001
+
+			(* then - Stmts *)
+
+(** 		blinker := FALSE; **)
+			(* assign - Stmt *)
+			LD FALSE
+			ST blinker
+
+			JMP ODK_END_IF_000000000000005
+
+(** 	ELSE **)
+		(* else *) 
+		ODK_SKIP_000000000000005_000000000000001:
+
+			(* else - Stmts *)
+
+(** 		; **)
+(** 	END_IF; **)
+		(* if - End *) 
+		ODK_END_IF_000000000000005:
+
+(**  **)
+(**  **)
+(** 	REG_R_UINT_VAR(ADDR := 10004); **)
+		(* call - Stmt *)
+		CAL REG_R_UINT_VAR (
+			ADDR := 10004
+		)
+
+(** 	gdw := REG_R_UINT_VAR.DATA; **)
+		(* assign - Stmt *)
+		LD REG_R_UINT_VAR.DATA
+		ST gdw
+
+(** 	IF gdw=1 THEN **)
+		(* if - Cond *)
+		LD gdw
+		EQ 1
+		JMPCN ODK_SKIP_000000000000006_000000000000001
+
+			(* then - Stmts *)
+
+(** 		blinker2 := FALSE; **)
+			(* assign - Stmt *)
+			LD FALSE
+			ST blinker2
+
+			JMP ODK_END_IF_000000000000006
+
+(** 	ELSE **)
+		(* else *) 
+		ODK_SKIP_000000000000006_000000000000001:
+
+			(* else - Stmts *)
+
+(** 		; **)
+(** 	END_IF; **)
+		(* if - End *) 
+		ODK_END_IF_000000000000006:
+
+(** 	{*出站电动阀*} **)
+(** 	REG_R_UINT_VAR(ADDR := 40078); **)
+		(* call - Stmt *)
+		CAL REG_R_UINT_VAR (
+			ADDR := 40078
+		)
+
+(** 	par_var := REG_R_UINT_VAR.DATA; **)
+		(* assign - Stmt *)
+		LD REG_R_UINT_VAR.DATA
+		ST par_var
+
+(** 	IF par_var=1 THEN **)
+		(* if - Cond *)
+		LD par_var
+		EQ 1
+		JMPCN ODK_SKIP_000000000000007_000000000000001
+
+			(* then - Stmts *)
+
+(** 	{*参数修改*} **)
+(** 		REG_W_UINT_VAR(ADDR := 40078, DATA := 0); **)
+			(* call - Stmt *)
+			CAL REG_W_UINT_VAR (
+				ADDR := 40078,
+				DATA := 0
+			)
+
+(** 		REG_R_UINT_VAR(ADDR := 40075); **)
+			(* call - Stmt *)
+			CAL REG_R_UINT_VAR (
+				ADDR := 40075
+			)
+
+(** 		jf2_open := REG_R_UINT_VAR.DATA; **)
+			(* assign - Stmt *)
+			LD REG_R_UINT_VAR.DATA
+			ST jf2_open
+
+(** 		IF jf2_open=1 THEN **)
+			(* if - Cond *)
+			LD jf2_open
+			EQ 1
+			JMPCN ODK_SKIP_000000000000008_000000000000001
+
+				(* then - Stmts *)
+
+(** 			blinker4 := TRUE; **)
+				(* assign - Stmt *)
+				LD TRUE
+				ST blinker4
+
+				JMP ODK_END_IF_000000000000008
+
+(** 		ELSE  **)
+			(* else *) 
+			ODK_SKIP_000000000000008_000000000000001:
+
+				(* else - Stmts *)
+
+(** 			blinker4 := FALSE; **)
+				(* assign - Stmt *)
+				LD FALSE
+				ST blinker4
+
+(** 		 **)
+(** 		END_IF; **)
+			(* if - End *) 
+			ODK_END_IF_000000000000008:
+
+(** 	 **)
+(** 		REG_R_UINT_VAR(ADDR := 40076); **)
+			(* call - Stmt *)
+			CAL REG_R_UINT_VAR (
+				ADDR := 40076
+			)
+
+(** 		jf2_close := REG_R_UINT_VAR.DATA; **)
+			(* assign - Stmt *)
+			LD REG_R_UINT_VAR.DATA
+			ST jf2_close
+
+(** 		IF jf2_close=1 THEN **)
+			(* if - Cond *)
+			LD jf2_close
+			EQ 1
+			JMPCN ODK_SKIP_000000000000009_000000000000001
+
+				(* then - Stmts *)
+
+(** 			blinker5 := TRUE; **)
+				(* assign - Stmt *)
+				LD TRUE
+				ST blinker5
+
+				JMP ODK_END_IF_000000000000009
+
+(** 		ELSE  **)
+			(* else *) 
+			ODK_SKIP_000000000000009_000000000000001:
+
+				(* else - Stmts *)
+
+(** 			blinker5 := FALSE; **)
+				(* assign - Stmt *)
+				LD FALSE
+				ST blinker5
+
+(** 		END_IF; **)
+			(* if - End *) 
+			ODK_END_IF_000000000000009:
+
+			JMP ODK_END_IF_000000000000007
+
+(** 	ELSE **)
+		(* else *) 
+		ODK_SKIP_000000000000007_000000000000001:
+
+			(* else - Stmts *)
+
+(** 	{*参数未修改*} **)
+(** 		; **)
+(** 	END_IF; **)
+		(* if - End *) 
+		ODK_END_IF_000000000000007:
+
+(**   **)
+(** 	REG_R_UINT_VAR(ADDR := 10006); **)
+		(* call - Stmt *)
+		CAL REG_R_UINT_VAR (
+			ADDR := 10006
+		)
+
+(** 	kdw2 := REG_R_UINT_VAR.DATA; **)
+		(* assign - Stmt *)
+		LD REG_R_UINT_VAR.DATA
+		ST kdw2
+
+(** 	IF kdw2=1 THEN **)
+		(* if - Cond *)
+		LD kdw2
+		EQ 1
+		JMPCN ODK_SKIP_00000000000000A_000000000000001
+
+			(* then - Stmts *)
+
+(** 		blinker4 := FALSE; **)
+			(* assign - Stmt *)
+			LD FALSE
+			ST blinker4
+
+			JMP ODK_END_IF_00000000000000A
+
+(** 	ELSE **)
+		(* else *) 
+		ODK_SKIP_00000000000000A_000000000000001:
+
+			(* else - Stmts *)
+
+(** 		; **)
+(** 	END_IF; **)
+		(* if - End *) 
+		ODK_END_IF_00000000000000A:
+
+(**  **)
+(**  **)
+(** 	REG_R_UINT_VAR(ADDR := 10007); **)
+		(* call - Stmt *)
+		CAL REG_R_UINT_VAR (
+			ADDR := 10007
+		)
+
+(** 	gdw2 := REG_R_UINT_VAR.DATA; **)
+		(* assign - Stmt *)
+		LD REG_R_UINT_VAR.DATA
+		ST gdw2
+
+(** 	IF gdw2=1 THEN **)
+		(* if - Cond *)
+		LD gdw2
+		EQ 1
+		JMPCN ODK_SKIP_00000000000000B_000000000000001
+
+			(* then - Stmts *)
+
+(** 		blinker5 := FALSE; **)
+			(* assign - Stmt *)
+			LD FALSE
+			ST blinker5
+
+			JMP ODK_END_IF_00000000000000B
+
+(** 	ELSE **)
+		(* else *) 
+		ODK_SKIP_00000000000000B_000000000000001:
+
+			(* else - Stmts *)
+
+(** 		; **)
+(** 	END_IF; **)
+		(* if - End *) 
+		ODK_END_IF_00000000000000B:
+
+(** 	 **)
+(** 	{*进站放空阀*} **)
+(** 	REG_R_UINT_VAR(ADDR := 40082); **)
+		(* call - Stmt *)
+		CAL REG_R_UINT_VAR (
+			ADDR := 40082
+		)
+
+(** 	par_var := REG_R_UINT_VAR.DATA; **)
+		(* assign - Stmt *)
+		LD REG_R_UINT_VAR.DATA
+		ST par_var
+
+(** 	IF par_var=1 THEN **)
+		(* if - Cond *)
+		LD par_var
+		EQ 1
+		JMPCN ODK_SKIP_00000000000000C_000000000000001
+
+			(* then - Stmts *)
+
+(** 	{*参数修改*} **)
+(** 		REG_W_UINT_VAR(ADDR := 40082, DATA := 0); **)
+			(* call - Stmt *)
+			CAL REG_W_UINT_VAR (
+				ADDR := 40082,
+				DATA := 0
+			)
+
+(** 		REG_R_UINT_VAR(ADDR := 40079); **)
+			(* call - Stmt *)
+			CAL REG_R_UINT_VAR (
+				ADDR := 40079
+			)
+
+(** 		jf3_open := REG_R_UINT_VAR.DATA; **)
+			(* assign - Stmt *)
+			LD REG_R_UINT_VAR.DATA
+			ST jf3_open
+
+(** 		IF jf3_open=1 THEN **)
+			(* if - Cond *)
+			LD jf3_open
+			EQ 1
+			JMPCN ODK_SKIP_00000000000000D_000000000000001
+
+				(* then - Stmts *)
+
+(** 			blinker7 := TRUE; **)
+				(* assign - Stmt *)
+				LD TRUE
+				ST blinker7
+
+				JMP ODK_END_IF_00000000000000D
+
+(** 		ELSE  **)
+			(* else *) 
+			ODK_SKIP_00000000000000D_000000000000001:
+
+				(* else - Stmts *)
+
+(** 			blinker7 := FALSE; **)
+				(* assign - Stmt *)
+				LD FALSE
+				ST blinker7
+
+(** 		 **)
+(** 		END_IF; **)
+			(* if - End *) 
+			ODK_END_IF_00000000000000D:
+
+(** 	 **)
+(** 		REG_R_UINT_VAR(ADDR := 40080); **)
+			(* call - Stmt *)
+			CAL REG_R_UINT_VAR (
+				ADDR := 40080
+			)
+
+(** 		jf3_close := REG_R_UINT_VAR.DATA; **)
+			(* assign - Stmt *)
+			LD REG_R_UINT_VAR.DATA
+			ST jf3_close
+
+(** 		IF jf3_close=1 THEN **)
+			(* if - Cond *)
+			LD jf3_close
+			EQ 1
+			JMPCN ODK_SKIP_00000000000000E_000000000000001
+
+				(* then - Stmts *)
+
+(** 			blinker8 := TRUE; **)
+				(* assign - Stmt *)
+				LD TRUE
+				ST blinker8
+
+				JMP ODK_END_IF_00000000000000E
+
+(** 		ELSE  **)
+			(* else *) 
+			ODK_SKIP_00000000000000E_000000000000001:
+
+				(* else - Stmts *)
+
+(** 			blinker8 := FALSE; **)
+				(* assign - Stmt *)
+				LD FALSE
+				ST blinker8
+
+(** 		END_IF; **)
+			(* if - End *) 
+			ODK_END_IF_00000000000000E:
+
+			JMP ODK_END_IF_00000000000000C
+
+(** 	ELSE **)
+		(* else *) 
+		ODK_SKIP_00000000000000C_000000000000001:
+
+			(* else - Stmts *)
+
+(** 	{*参数未修改*} **)
+(** 		; **)
+(** 	END_IF; **)
+		(* if - End *) 
+		ODK_END_IF_00000000000000C:
+
+(**   **)
+(** 	REG_R_UINT_VAR(ADDR := 10010); **)
+		(* call - Stmt *)
+		CAL REG_R_UINT_VAR (
+			ADDR := 10010
+		)
+
+(** 	kdw3 := REG_R_UINT_VAR.DATA; **)
+		(* assign - Stmt *)
+		LD REG_R_UINT_VAR.DATA
+		ST kdw3
+
+(** 	IF kdw3=1 THEN **)
+		(* if - Cond *)
+		LD kdw3
+		EQ 1
+		JMPCN ODK_SKIP_00000000000000F_000000000000001
+
+			(* then - Stmts *)
+
+(** 		blinker7 := FALSE; **)
+			(* assign - Stmt *)
+			LD FALSE
+			ST blinker7
+
+			JMP ODK_END_IF_00000000000000F
+
+(** 	ELSE **)
+		(* else *) 
+		ODK_SKIP_00000000000000F_000000000000001:
+
+			(* else - Stmts *)
+
+(** 		; **)
+(** 	END_IF; **)
+		(* if - End *) 
+		ODK_END_IF_00000000000000F:
+
+(**  **)
+(**  **)
+(** 	REG_R_UINT_VAR(ADDR := 10011); **)
+		(* call - Stmt *)
+		CAL REG_R_UINT_VAR (
+			ADDR := 10011
+		)
+
+(** 	gdw3 := REG_R_UINT_VAR.DATA; **)
+		(* assign - Stmt *)
+		LD REG_R_UINT_VAR.DATA
+		ST gdw3
+
+(** 	IF gdw3=1 THEN **)
+		(* if - Cond *)
+		LD gdw3
+		EQ 1
+		JMPCN ODK_SKIP_00000000000000G_000000000000001
+
+			(* then - Stmts *)
+
+(** 		blinker8 := FALSE; **)
+			(* assign - Stmt *)
+			LD FALSE
+			ST blinker8
+
+			JMP ODK_END_IF_00000000000000G
+
+(** 	ELSE **)
+		(* else *) 
+		ODK_SKIP_00000000000000G_000000000000001:
+
+			(* else - Stmts *)
+
+(** 		; **)
+(** 	END_IF; **)
+		(* if - End *) 
+		ODK_END_IF_00000000000000G:
+
+(** 	 **)
+(** 	{*出站放空阀*} **)
+(** 	REG_R_UINT_VAR(ADDR := 40086); **)
+		(* call - Stmt *)
+		CAL REG_R_UINT_VAR (
+			ADDR := 40086
+		)
+
+(** 	par_var := REG_R_UINT_VAR.DATA; **)
+		(* assign - Stmt *)
+		LD REG_R_UINT_VAR.DATA
+		ST par_var
+
+(** 	IF par_var=1 THEN **)
+		(* if - Cond *)
+		LD par_var
+		EQ 1
+		JMPCN ODK_SKIP_00000000000000H_000000000000001
+
+			(* then - Stmts *)
+
+(** 	{*参数修改*} **)
+(** 		REG_W_UINT_VAR(ADDR := 40086, DATA := 0); **)
+			(* call - Stmt *)
+			CAL REG_W_UINT_VAR (
+				ADDR := 40086,
+				DATA := 0
+			)
+
+(** 		REG_R_UINT_VAR(ADDR := 40083); **)
+			(* call - Stmt *)
+			CAL REG_R_UINT_VAR (
+				ADDR := 40083
+			)
+
+(** 		jf4_open := REG_R_UINT_VAR.DATA; **)
+			(* assign - Stmt *)
+			LD REG_R_UINT_VAR.DATA
+			ST jf4_open
+
+(** 		IF jf4_open=1 THEN **)
+			(* if - Cond *)
+			LD jf4_open
+			EQ 1
+			JMPCN ODK_SKIP_00000000000000I_000000000000001
+
+				(* then - Stmts *)
+
+(** 			blinker10 := TRUE; **)
+				(* assign - Stmt *)
+				LD TRUE
+				ST blinker10
+
+				JMP ODK_END_IF_00000000000000I
+
+(** 		ELSE  **)
+			(* else *) 
+			ODK_SKIP_00000000000000I_000000000000001:
+
+				(* else - Stmts *)
+
+(** 			blinker10 := FALSE; **)
+				(* assign - Stmt *)
+				LD FALSE
+				ST blinker10
+
+(** 		 **)
+(** 		END_IF; **)
+			(* if - End *) 
+			ODK_END_IF_00000000000000I:
+
+(** 	 **)
+(** 		REG_R_UINT_VAR(ADDR := 40084); **)
+			(* call - Stmt *)
+			CAL REG_R_UINT_VAR (
+				ADDR := 40084
+			)
+
+(** 		jf4_close := REG_R_UINT_VAR.DATA; **)
+			(* assign - Stmt *)
+			LD REG_R_UINT_VAR.DATA
+			ST jf4_close
+
+(** 		IF jf4_close=1 THEN **)
+			(* if - Cond *)
+			LD jf4_close
+			EQ 1
+			JMPCN ODK_SKIP_00000000000000J_000000000000001
+
+				(* then - Stmts *)
+
+(** 			blinker11 := TRUE; **)
+				(* assign - Stmt *)
+				LD TRUE
+				ST blinker11
+
+				JMP ODK_END_IF_00000000000000J
+
+(** 		ELSE  **)
+			(* else *) 
+			ODK_SKIP_00000000000000J_000000000000001:
+
+				(* else - Stmts *)
+
+(** 			blinker11 := FALSE; **)
+				(* assign - Stmt *)
+				LD FALSE
+				ST blinker11
+
+(** 		END_IF; **)
+			(* if - End *) 
+			ODK_END_IF_00000000000000J:
+
+			JMP ODK_END_IF_00000000000000H
+
+(** 	ELSE **)
+		(* else *) 
+		ODK_SKIP_00000000000000H_000000000000001:
+
+			(* else - Stmts *)
+
+(** 	{*参数未修改*} **)
+(** 		; **)
+(** 	END_IF; **)
+		(* if - End *) 
+		ODK_END_IF_00000000000000H:
+
+(**   **)
+(** 	REG_R_UINT_VAR(ADDR := 10014); **)
+		(* call - Stmt *)
+		CAL REG_R_UINT_VAR (
+			ADDR := 10014
+		)
+
+(** 	kdw4 := REG_R_UINT_VAR.DATA; **)
+		(* assign - Stmt *)
+		LD REG_R_UINT_VAR.DATA
+		ST kdw4
+
+(** 	IF kdw4=1 THEN **)
+		(* if - Cond *)
+		LD kdw4
+		EQ 1
+		JMPCN ODK_SKIP_00000000000000K_000000000000001
+
+			(* then - Stmts *)
+
+(** 		blinker10 := FALSE; **)
+			(* assign - Stmt *)
+			LD FALSE
+			ST blinker10
+
+			JMP ODK_END_IF_00000000000000K
+
+(** 	ELSE **)
+		(* else *) 
+		ODK_SKIP_00000000000000K_000000000000001:
+
+			(* else - Stmts *)
+
+(** 		; **)
+(** 	END_IF; **)
+		(* if - End *) 
+		ODK_END_IF_00000000000000K:
+
+(**  **)
+(**  **)
+(** 	REG_R_UINT_VAR(ADDR := 10015); **)
+		(* call - Stmt *)
+		CAL REG_R_UINT_VAR (
+			ADDR := 10015
+		)
+
+(** 	gdw4 := REG_R_UINT_VAR.DATA; **)
+		(* assign - Stmt *)
+		LD REG_R_UINT_VAR.DATA
+		ST gdw4
+
+(** 	IF gdw4=1 THEN **)
+		(* if - Cond *)
+		LD gdw4
+		EQ 1
+		JMPCN ODK_SKIP_00000000000000L_000000000000001
+
+			(* then - Stmts *)
+
+(** 		blinker11 := FALSE; **)
+			(* assign - Stmt *)
+			LD FALSE
+			ST blinker11
+
+			JMP ODK_END_IF_00000000000000L
+
+(** 	ELSE **)
+		(* else *) 
+		ODK_SKIP_00000000000000L_000000000000001:
+
+			(* else - Stmts *)
+
+(** 		; **)
+(** 	END_IF; **)
+		(* if - End *) 
+		ODK_END_IF_00000000000000L:
+
+		JMP ODK_END_IF_000000000000001
+
+(** ELSE **)
+	(* else *) 
+	ODK_SKIP_000000000000001_000000000000001:
+
+		(* else - Stmts *)
+
+(** 	{*急停关阀操作*} **)
+(** 	{*先关进站气液，出站电动，再开进出放空*} **)
+(** 	blinker3 := FALSE; **)
+		(* assign - Stmt *)
+		LD FALSE
+		ST blinker3
+
+(** 	blinker9 := TRUE; **)
+		(* assign - Stmt *)
+		LD TRUE
+		ST blinker9
+
+(** 	blinker12 := TRUE; **)
+		(* assign - Stmt *)
+		LD TRUE
+		ST blinker12
+
+(** 	REG_R_UINT_VAR(ADDR := 10004); **)
+		(* call - Stmt *)
+		CAL REG_R_UINT_VAR (
+			ADDR := 10004
+		)
+
+(** 	jt_gdw1 := REG_R_UINT_VAR.DATA; **)
+		(* assign - Stmt *)
+		LD REG_R_UINT_VAR.DATA
+		ST jt_gdw1
+
+(** {*	IF jt_gdw1=1 THEN **)
+(** 		blinker2 := FALSE; **)
+(** 	ELSE **)
+(** 		blinker2 := TRUE;	 **)
+(** 	END_IF; **)
+(** 	*} **)
+(** 	REG_R_UINT_VAR(ADDR := 10007); **)
+		(* call - Stmt *)
+		CAL REG_R_UINT_VAR (
+			ADDR := 10007
+		)
+
+(** 	jt_gdw2 := REG_R_UINT_VAR.DATA; **)
+		(* assign - Stmt *)
+		LD REG_R_UINT_VAR.DATA
+		ST jt_gdw2
+
+(** 	IF jt_gdw2=1 THEN **)
+		(* if - Cond *)
+		LD jt_gdw2
+		EQ 1
+		JMPCN ODK_SKIP_00000000000000M_000000000000001
+
+			(* then - Stmts *)
+
+(** 		blinker5 := FALSE; **)
+			(* assign - Stmt *)
+			LD FALSE
+			ST blinker5
+
+			JMP ODK_END_IF_00000000000000M
+
+(** 	ELSE **)
+		(* else *) 
+		ODK_SKIP_00000000000000M_000000000000001:
+
+			(* else - Stmts *)
+
+(** 		blinker5 := TRUE; **)
+			(* assign - Stmt *)
+			LD TRUE
+			ST blinker5
+
+(** 	END_IF; **)
+		(* if - End *) 
+		ODK_END_IF_00000000000000M:
+
+(** 	 **)
+(** 	IF jt_gdw1=1 AND jt_gdw2=1 THEN **)
+		(* if - Cond *)
+		LD jt_gdw1
+		EQ 1
+		AND ( jt_gdw2
+			EQ 1
+		)
+		JMPCN ODK_SKIP_00000000000000N_000000000000001
+
+			(* then - Stmts *)
+
+			JMP ODK_END_IF_00000000000000N
+
+(** 		{*REG_R_UINT_VAR(ADDR := 10010); **)
+(** 		jt_kdw1 := REG_R_UINT_VAR.DATA; **)
+(** 		IF jt_kdw1=1 THEN **)
+(** 			blinker7 := FALSE; **)
+(** 		ELSE **)
+(** 			blinker7 := TRUE;	 **)
+(** 		END_IF; **)
+(** 			 **)
+(** 		REG_R_UINT_VAR(ADDR := 10014); **)
+(** 		jt_kdw2 := REG_R_UINT_VAR.DATA; **)
+(** 		IF jt_kdw2=1 THEN **)
+(** 			blinker10 := FALSE; **)
+(** 		ELSE **)
+(** 			blinker10 := TRUE; **)
+(** 		END_IF;*} **)
+(** 		; **)
+(** 	ELSE **)
+		(* else *) 
+		ODK_SKIP_00000000000000N_000000000000001:
+
+			(* else - Stmts *)
+
+(** 		; **)
+(** 	END_IF; **)
+		(* if - End *) 
+		ODK_END_IF_00000000000000N:
+
+(** END_IF; **)
+	(* if - End *) 
+	ODK_END_IF_000000000000001:
+
+(**  **)
+(**  **)
+(**  **)
+(** REG_R_UINT_VAR(ADDR := 40112); **)
+	(* call - Stmt *)
+	CAL REG_R_UINT_VAR (
+		ADDR := 40112
+	)
+
+(** par_var := REG_R_UINT_VAR.DATA; **)
+	(* assign - Stmt *)
+	LD REG_R_UINT_VAR.DATA
+	ST par_var
+
+(** IF par_var=1 THEN **)
+	(* if - Cond *)
+	LD par_var
+	EQ 1
+	JMPCN ODK_SKIP_00000000000000O_000000000000001
+
+		(* then - Stmts *)
+
+(** 	REG_W_UINT_VAR(ADDR := 40112, DATA := 0); **)
+		(* call - Stmt *)
+		CAL REG_W_UINT_VAR (
+			ADDR := 40112,
+			DATA := 0
+		)
+
+(** 	REG_R_UINT_VAR(ADDR := 40111); **)
+		(* call - Stmt *)
+		CAL REG_R_UINT_VAR (
+			ADDR := 40111
+		)
+
+(** 	sgbj := REG_R_UINT_VAR.DATA; **)
+		(* assign - Stmt *)
+		LD REG_R_UINT_VAR.DATA
+		ST sgbj
+
+(** 	IF sgbj=1 THEN **)
+		(* if - Cond *)
+		LD sgbj
+		EQ 1
+		JMPCN ODK_SKIP_00000000000000P_000000000000001
+
+			(* then - Stmts *)
+
+(** 		blinker13 := TRUE; **)
+			(* assign - Stmt *)
+			LD TRUE
+			ST blinker13
+
+			JMP ODK_END_IF_00000000000000P
+
+(** 	ELSE **)
+		(* else *) 
+		ODK_SKIP_00000000000000P_000000000000001:
+
+			(* else - Stmts *)
+
+(** 		blinker13 := FALSE; **)
+			(* assign - Stmt *)
+			LD FALSE
+			ST blinker13
+
+(** 	END_IF; **)
+		(* if - End *) 
+		ODK_END_IF_00000000000000P:
+
+		JMP ODK_END_IF_00000000000000O
+
+(** ELSE **)
+	(* else *) 
+	ODK_SKIP_00000000000000O_000000000000001:
+
+		(* else - Stmts *)
+
+(** 	; **)
+(** END_IF; **)
+	(* if - End *) 
+	ODK_END_IF_00000000000000O:
+
+END_PROGRAM

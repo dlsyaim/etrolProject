@@ -1,0 +1,14 @@
+
+正在构建资源 D:\git\etrolProject\MyFirst\$ENV$\Resource\Resource.MAK。
+正在执行预生成步骤:
+删除D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\BuildLog.txt
+
+正在创建依从列表(dependency list): 
+D:\git\etrolProject\MyFirst\blinker_st.POE
+文件未找到: D:\git\etrolProject\MyFirst\myfirst.POE.
+1 错误, 0 警告 - D:\git\etrolProject\MyFirst\myfirst.POE.
+
+1 错误, 0 警告.
+
+总数:
+1 错误(s) 0 警告(s)

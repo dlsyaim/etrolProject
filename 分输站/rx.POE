@@ -1,0 +1,13 @@
+$BEGIN_IT_HEADER
+GLOBALDEFINITIONS = 1 
+$END_IT_HEADER
+PROGRAM rx
+VAR_GLOBAL
+jiachou : udint := 0;
+flow_val : REAL := 0.0;
+start_val : uint := 0;
+uu : uint:= 0;
+END_VAR
+
+
+END_PROGRAM

@@ -1,0 +1,65 @@
+
+正在构建资源 D:\git\etrolProject\MyFirst\$ENV$\Resource\Resource.MAK。
+正在执行预生成步骤:
+删除D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\$TASK00$.CRD
+删除D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\blinker_st.CRD
+删除D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\blinker_st.INC
+删除D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\blinker_st.OBJ
+删除D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\BuildLog.txt
+删除D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\myfirst.CRD
+删除D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\myfirst.INC
+删除D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\myfirst.OBJ
+删除D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\pceData.txt
+删除D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\pceSegs.txt
+删除D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\pceVars.txt
+删除D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\pceVars.txt.xml
+删除D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\Resource.PCD
+删除D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\Resource.prs
+删除D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\USERTYPE.INC
+
+正在创建依从列表(dependency list): 
+D:\git\etrolProject\MyFirst\blinker_st.POE
+D:\git\etrolProject\MyFirst\myfirst.POE
+
+正在编译 ...
+
+正在执行语法检查为文件: 
+D:\GIT\ETROLPROJECT\MYFIRST\USERTYPE.typ
+0 错误, 0 警告 - D:\GIT\ETROLPROJECT\MYFIRST\USERTYPE.typ.
+
+
+正在创建原型: 
+D:\git\etrolProject\MyFirst\blinker_st.POE
+D:\git\etrolProject\MyFirst\myfirst.POE
+
+正在创建包含文件: 
+D:\git\etrolProject\MyFirst\blinker_st.POE
+D:\git\etrolProject\MyFirst\myfirst.POE
+
+正在编译文件: 
+D:\git\etrolProject\MyFirst\blinker_st.POE
+0 错误, 0 警告 - D:\git\etrolProject\MyFirst\blinker_st.POE.
+
+D:\git\etrolProject\MyFirst\myfirst.POE
+0 错误, 0 警告 - D:\git\etrolProject\MyFirst\myfirst.POE.
+
+
+连接 ...
+正在连接全局资源 ...
+正在连接任务 BLINKER_ST ...
+正在连接: D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\blinker_st.OBJ。
+正在连接: TON。
+正在连接任务 MYFIRST ...
+正在连接: D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\myfirst.OBJ。
+正在连接资源: RESOURCE ...
+正在连接: D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\$TASK00$.CRD。
+正在连接: D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\blinker_st.CRD。
+正在连接: D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\myfirst.CRD。
+代码大小字节: 7565.
+段个数: 38。
+0 错误, 0 警告 - D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\Resource.PCD.
+
+VARTAB32: VarTab版本: 1
+VARTAB32: 0 变量加入到 1 段中 (45 字节)
+正在执行后生成步骤:
+PADTRTPS_SIM.EXE -s "D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\Resource.prs" -pcd="D:\GIT\ETROLPROJECT\MYFIRST\$GEN$\Resource\Resource.pcd"

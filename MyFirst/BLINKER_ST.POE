@@ -1,0 +1,64 @@
+PROGRAM blinker_st
+VAR_EXTERNAL
+
+END_VAR
+
+VAR_GLOBAL
+
+END_VAR
+
+VAR
+	button AT %I0.0		:	BOOL;
+	blinker AT %Q0.0	:	BOOL;
+	timer				:	TON;
+END_VAR
+
+(*Automatically declared*)
+VAR_EXTERNAL
+END_VAR
+(** ; **)
+(**  **)
+(**  **)
+(**  **)
+(** timer(in:=button,pt:=T#2s); **)
+	(* call - Stmt *)
+	CAL timer (
+		in := button,
+		pt := T#2s
+	)
+
+(** if(timer.q) then **)
+	(* if - Cond *)
+	LD timer.q
+	JMPCN ODK_SKIP_000000000000001_000000000000001
+
+		(* then - Stmts *)
+
+(** 	blinker	:=	not blinker; **)
+		(* assign - Stmt *)
+		LD blinker
+		NOT
+		ST blinker
+
+(** 	timer (in:=false); **)
+		(* call - Stmt *)
+		CAL timer (
+			in := false
+		)
+
+		JMP ODK_END_IF_000000000000001
+
+(** end_if; **)
+	(* if - End *) 
+	ODK_SKIP_000000000000001_000000000000001:
+	ODK_END_IF_000000000000001:
+
+(**  **)
+(** blinker := blinker AND button; **)
+	(* assign - Stmt *)
+	LD blinker
+	AND button
+	ST blinker
+
+
+END_PROGRAM

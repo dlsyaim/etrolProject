@@ -1,0 +1,499 @@
+PROGRAM RX1
+VAR_EXTERNAL
+jiachou : udint;
+flow_val : REAL;
+start_val : uint;
+
+END_VAR
+
+VAR_GLOBAL
+jiachou1 : udint:=0;
+END_VAR
+
+VAR
+tjf_ya1_val : uint;
+tjf2_ya1_val : uint;
+tjf_kd1_val : uint; 
+tjf_ya2_val : uint;
+tjf_kd2_val : uint; 
+i : uint;
+j : uint;
+blinker AT %Q0.4 	:	BOOL;
+djr_start AT %Q1.5  :   BOOL;
+djr_stop  AT %Q1.6  :   BOOL;
+djr_par : uint;
+dir_mode : uint;
+dir_temp : uint;
+djr_qd   : uint;
+djr_tz   : uint;
+djr_settemp : REAL;
+dir_settemp_val : uint;
+dir_fktemp : uint;
+jiachounew : udint;
+par_var :uint;
+lock_var : uint;
+szd_var	:uint;
+addr_val : uint;
+shunshi_val : REAL;
+tongji_val : REAL;
+sdyl : REAL;
+sdyl_val :uint;
+sdyl1 : REAL;
+sdyl1_val :uint;
+tjf1_qd : uint;
+ai0_val : REAL;
+tjf_mode :uint;
+tjf2_mode :uint;
+sd_fw : REAL;
+sd_fw_val : uint;
+sd2_fw : REAL;
+sd2_fw_val : uint;
+tjf_xg : uint;
+tjf2_xg :uint;
+REG_W_UINT_VAR : REG_W_UINT;
+REG_R_UINT_VAR : REG_R_UINT;
+REG_MOVE_VAR   : REG_MOVE;
+REG_R_REAL_VAL : REG_R_REAL;
+REG_W_REAL_VAL : REG_W_REAL;
+Timer : TON;
+END_VAR
+
+(* Variable definition *)
+VAR
+
+    clear_all : PID_CLEAR_ALL;
+
+    adr_cfg : PID_ADDR_CFG;
+
+    adr_q : BOOL;
+
+    val_cfg : PID_PARA_SET;
+
+    val_q : BOOL;
+
+    ena : PID_ENABLE;
+
+    ena_q : BOOL;
+
+    state : PID_AUTO;
+
+    state_q : BOOL;
+
+END_VAR
+
+(*Automatically declared*)
+VAR_EXTERNAL
+END_VAR
+(**  **)
+(** {*调节阀1控制*} **)
+(** REG_R_UINT_VAR(ADDR := 40097); **)
+	(* call - Stmt *)
+	CAL REG_R_UINT_VAR (
+		ADDR := 40097
+	)
+
+(** tjf_mode := REG_R_UINT_VAR.DATA; **)
+	(* assign - Stmt *)
+	LD REG_R_UINT_VAR.DATA
+	ST tjf_mode
+
+(** REG_R_UINT_VAR(ADDR := 40098); **)
+	(* call - Stmt *)
+	CAL REG_R_UINT_VAR (
+		ADDR := 40098
+	)
+
+(** tjf_xg := REG_R_UINT_VAR.DATA; **)
+	(* assign - Stmt *)
+	LD REG_R_UINT_VAR.DATA
+	ST tjf_xg
+
+(** IF tjf_xg=1 THEN **)
+	(* if - Cond *)
+	LD tjf_xg
+	EQ 1
+	JMPCN ODK_SKIP_000000000000001_000000000000001
+
+		(* then - Stmts *)
+
+(** 	REG_W_UINT_VAR(ADDR := 40098, DATA := 0); **)
+		(* call - Stmt *)
+		CAL REG_W_UINT_VAR (
+			ADDR := 40098,
+			DATA := 0
+		)
+
+(** 	addr_val := 40095; **)
+		(* assign - Stmt *)
+		LD 40095
+		ST addr_val
+
+(** 	REG_R_REAL_VAL(ADDR := addr_val, SWAP := 0); **)
+		(* call - Stmt *)
+		CAL REG_R_REAL_VAL (
+			ADDR := addr_val,
+			SWAP := 0
+		)
+
+(** 	sd_fw := (REG_R_REAL_VAL.DATA)/100.0 * 40000.0 + 10000.0; **)
+		(* assign - Stmt *)
+		LD REG_R_REAL_VAL.DATA
+		DIV 100.0
+		MUL 40000.0
+		ADD 10000.0
+		ST sd_fw
+
+(** 	sd_fw_val := REAL_TO_uint(sd_fw); **)
+		(* assign - Stmt *)
+		LD sd_fw
+		REAL_TO_uint 
+		ST sd_fw_val
+
+(** 	REG_W_UINT_VAR(ADDR := 40200, DATA := sd_fw_val); **)
+		(* call - Stmt *)
+		CAL REG_W_UINT_VAR (
+			ADDR := 40200,
+			DATA := sd_fw_val
+		)
+
+		JMP ODK_END_IF_000000000000001
+
+(** END_IF; **)
+	(* if - End *) 
+	ODK_SKIP_000000000000001_000000000000001:
+	ODK_END_IF_000000000000001:
+
+(**  **)
+(**  **)
+(** REG_R_UINT_VAR(ADDR := 40097); **)
+	(* call - Stmt *)
+	CAL REG_R_UINT_VAR (
+		ADDR := 40097
+	)
+
+(** tjf_mode := REG_R_UINT_VAR.DATA; **)
+	(* assign - Stmt *)
+	LD REG_R_UINT_VAR.DATA
+	ST tjf_mode
+
+(** REG_W_UINT_VAR(ADDR := 40091, DATA := tjf_mode); **)
+	(* call - Stmt *)
+	CAL REG_W_UINT_VAR (
+		ADDR := 40091,
+		DATA := tjf_mode
+	)
+
+(**  **)
+(** addr_val := 40005; **)
+	(* assign - Stmt *)
+	LD 40005
+	ST addr_val
+
+(** REG_R_REAL_VAL(ADDR := addr_val, SWAP := 0); **)
+	(* call - Stmt *)
+	CAL REG_R_REAL_VAL (
+		ADDR := addr_val,
+		SWAP := 0
+	)
+
+(** ai0_val := REG_R_REAL_VAL.DATA; **)
+	(* assign - Stmt *)
+	LD REG_R_REAL_VAL.DATA
+	ST ai0_val
+
+(** addr_val := 40087; **)
+	(* assign - Stmt *)
+	LD 40087
+	ST addr_val
+
+(** REG_W_REAL_VAL(ADDR := addr_val, SWAP := 0, DATA := ai0_val); **)
+	(* call - Stmt *)
+	CAL REG_W_REAL_VAL (
+		ADDR := addr_val,
+		SWAP := 0,
+		DATA := ai0_val
+	)
+
+(**  **)
+(**  **)
+(** {*调节阀2控制*} **)
+(** REG_R_UINT_VAR(ADDR := 40109); **)
+	(* call - Stmt *)
+	CAL REG_R_UINT_VAR (
+		ADDR := 40109
+	)
+
+(** tjf2_mode := REG_R_UINT_VAR.DATA; **)
+	(* assign - Stmt *)
+	LD REG_R_UINT_VAR.DATA
+	ST tjf2_mode
+
+(** REG_R_UINT_VAR(ADDR := 40110); **)
+	(* call - Stmt *)
+	CAL REG_R_UINT_VAR (
+		ADDR := 40110
+	)
+
+(** tjf2_xg := REG_R_UINT_VAR.DATA; **)
+	(* assign - Stmt *)
+	LD REG_R_UINT_VAR.DATA
+	ST tjf2_xg
+
+(** IF tjf2_xg=1 THEN **)
+	(* if - Cond *)
+	LD tjf2_xg
+	EQ 1
+	JMPCN ODK_SKIP_000000000000002_000000000000001
+
+		(* then - Stmts *)
+
+(** 	REG_W_UINT_VAR(ADDR := 40110, DATA := 0); **)
+		(* call - Stmt *)
+		CAL REG_W_UINT_VAR (
+			ADDR := 40110,
+			DATA := 0
+		)
+
+(** 	addr_val := 40107; **)
+		(* assign - Stmt *)
+		LD 40107
+		ST addr_val
+
+(** 	REG_R_REAL_VAL(ADDR := addr_val, SWAP := 0); **)
+		(* call - Stmt *)
+		CAL REG_R_REAL_VAL (
+			ADDR := addr_val,
+			SWAP := 0
+		)
+
+(** 	sd2_fw := (REG_R_REAL_VAL.DATA)/100.0 * 40000.0 + 10000.0; **)
+		(* assign - Stmt *)
+		LD REG_R_REAL_VAL.DATA
+		DIV 100.0
+		MUL 40000.0
+		ADD 10000.0
+		ST sd2_fw
+
+(** 	sd2_fw_val := REAL_TO_uint(sd2_fw); **)
+		(* assign - Stmt *)
+		LD sd2_fw
+		REAL_TO_uint 
+		ST sd2_fw_val
+
+(** 	REG_W_UINT_VAR(ADDR := 40201, DATA := sd2_fw_val); **)
+		(* call - Stmt *)
+		CAL REG_W_UINT_VAR (
+			ADDR := 40201,
+			DATA := sd2_fw_val
+		)
+
+		JMP ODK_END_IF_000000000000002
+
+(** END_IF; **)
+	(* if - End *) 
+	ODK_SKIP_000000000000002_000000000000001:
+	ODK_END_IF_000000000000002:
+
+(**  **)
+(** REG_R_UINT_VAR(ADDR := 40109); **)
+	(* call - Stmt *)
+	CAL REG_R_UINT_VAR (
+		ADDR := 40109
+	)
+
+(** tjf_mode := REG_R_UINT_VAR.DATA; **)
+	(* assign - Stmt *)
+	LD REG_R_UINT_VAR.DATA
+	ST tjf_mode
+
+(** REG_W_UINT_VAR(ADDR := 40103, DATA := tjf_mode); **)
+	(* call - Stmt *)
+	CAL REG_W_UINT_VAR (
+		ADDR := 40103,
+		DATA := tjf_mode
+	)
+
+(**  **)
+(** addr_val := 40007; **)
+	(* assign - Stmt *)
+	LD 40007
+	ST addr_val
+
+(** REG_R_REAL_VAL(ADDR := addr_val, SWAP := 0); **)
+	(* call - Stmt *)
+	CAL REG_R_REAL_VAL (
+		ADDR := addr_val,
+		SWAP := 0
+	)
+
+(** ai0_val := REG_R_REAL_VAL.DATA; **)
+	(* assign - Stmt *)
+	LD REG_R_REAL_VAL.DATA
+	ST ai0_val
+
+(** addr_val := 40099; **)
+	(* assign - Stmt *)
+	LD 40099
+	ST addr_val
+
+(** REG_W_REAL_VAL(ADDR := addr_val, SWAP := 0, DATA := ai0_val); **)
+	(* call - Stmt *)
+	CAL REG_W_REAL_VAL (
+		ADDR := addr_val,
+		SWAP := 0,
+		DATA := ai0_val
+	)
+
+(**  **)
+(**  **)
+(** {*电加热*} **)
+(** REG_R_UINT_VAR(ADDR := 40121); **)
+	(* call - Stmt *)
+	CAL REG_R_UINT_VAR (
+		ADDR := 40121
+	)
+
+(** djr_par := REG_R_UINT_VAR.DATA; **)
+	(* assign - Stmt *)
+	LD REG_R_UINT_VAR.DATA
+	ST djr_par
+
+(** IF djr_par=1 THEN **)
+	(* if - Cond *)
+	LD djr_par
+	EQ 1
+	JMPCN ODK_SKIP_000000000000003_000000000000001
+
+		(* then - Stmts *)
+
+(** 	REG_W_UINT_VAR(ADDR := 40121, DATA := 0); **)
+		(* call - Stmt *)
+		CAL REG_W_UINT_VAR (
+			ADDR := 40121,
+			DATA := 0
+		)
+
+(** 	REG_R_UINT_VAR(ADDR := 40117); **)
+		(* call - Stmt *)
+		CAL REG_R_UINT_VAR (
+			ADDR := 40117
+		)
+
+(** 	djr_qd := REG_R_UINT_VAR.DATA; **)
+		(* assign - Stmt *)
+		LD REG_R_UINT_VAR.DATA
+		ST djr_qd
+
+(** 	IF djr_qd=1 THEN **)
+		(* if - Cond *)
+		LD djr_qd
+		EQ 1
+		JMPCN ODK_SKIP_000000000000004_000000000000001
+
+			(* then - Stmts *)
+
+(** 		djr_start := TRUE; **)
+			(* assign - Stmt *)
+			LD TRUE
+			ST djr_start
+
+(** 		REG_R_REAL_VAL(ADDR := 40119, SWAP := 0); **)
+			(* call - Stmt *)
+			CAL REG_R_REAL_VAL (
+				ADDR := 40119,
+				SWAP := 0
+			)
+
+(** 		djr_settemp := (REG_R_REAL_VAL.DATA)/500.0 * 40000.0 + 10000.0; **)
+			(* assign - Stmt *)
+			LD REG_R_REAL_VAL.DATA
+			DIV 500.0
+			MUL 40000.0
+			ADD 10000.0
+			ST djr_settemp
+
+(** 		dir_settemp_val := REAL_TO_uint(djr_settemp); **)
+			(* assign - Stmt *)
+			LD djr_settemp
+			REAL_TO_uint 
+			ST dir_settemp_val
+
+(** 		REG_W_UINT_VAR(ADDR := 40304, DATA := dir_settemp_val); **)
+			(* call - Stmt *)
+			CAL REG_W_UINT_VAR (
+				ADDR := 40304,
+				DATA := dir_settemp_val
+			)
+
+			JMP ODK_END_IF_000000000000004
+
+(** 		{*REG_R_UINT_VAR(ADDR := 30013); **)
+(** 		dir_fktemp := REG_R_UINT_VAR.DATA; **)
+(** 		REG_W_UINT_VAR(ADDR := 40305, DATA := dir_fktemp);*} **)
+(** 	ELSE **)
+		(* else *) 
+		ODK_SKIP_000000000000004_000000000000001:
+
+			(* else - Stmts *)
+
+(** 		djr_start := FALSE; **)
+			(* assign - Stmt *)
+			LD FALSE
+			ST djr_start
+
+(** 	END_IF; **)
+		(* if - End *) 
+		ODK_END_IF_000000000000004:
+
+(** 	 **)
+(** 	REG_R_UINT_VAR(ADDR := 40118); **)
+		(* call - Stmt *)
+		CAL REG_R_UINT_VAR (
+			ADDR := 40118
+		)
+
+(** 	djr_tz := REG_R_UINT_VAR.DATA; **)
+		(* assign - Stmt *)
+		LD REG_R_UINT_VAR.DATA
+		ST djr_tz
+
+(** 	IF djr_tz=1 THEN **)
+		(* if - Cond *)
+		LD djr_tz
+		EQ 1
+		JMPCN ODK_SKIP_000000000000005_000000000000001
+
+			(* then - Stmts *)
+
+(** 		djr_stop := TRUE; **)
+			(* assign - Stmt *)
+			LD TRUE
+			ST djr_stop
+
+			JMP ODK_END_IF_000000000000005
+
+(** 	ELSE **)
+		(* else *) 
+		ODK_SKIP_000000000000005_000000000000001:
+
+			(* else - Stmts *)
+
+(** 		djr_stop := FALSE; **)
+			(* assign - Stmt *)
+			LD FALSE
+			ST djr_stop
+
+(** 	END_IF; **)
+		(* if - End *) 
+		ODK_END_IF_000000000000005:
+
+		JMP ODK_END_IF_000000000000003
+
+(** 	 **)
+(** END_IF; **)
+	(* if - End *) 
+	ODK_SKIP_000000000000003_000000000000001:
+	ODK_END_IF_000000000000003:
+
+
+END_PROGRAM

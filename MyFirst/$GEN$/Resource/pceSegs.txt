@@ -1,0 +1,13 @@
+2/10	Datasegment	2/11	6	MYFIRST
+2/11	Codesegment	2/12	7
+2/12	Initialsegment	2/11	16
+2/13	Instancetable	--	14
+2/14	Downloadtable	--	38
+1/10	Datasegment	1/11	18	BLINKER_ST
+1/11	Codesegment	1/12	66
+1/12	Initialsegment	1/11	16
+1/13	Datasegment	1/14	25	BLINKER_ST.TIMER
+1/14	Codesegment	1/15	7
+1/15	Initialsegment	1/14	35
+1/16	Instancetable	--	32
+1/17	Downloadtable	--	76

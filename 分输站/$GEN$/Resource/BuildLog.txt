@@ -1,0 +1,57 @@
+
+正在构建资源 D:\git\etrolProject\分输站\$ENV$\Resource\Resource.MAK。
+正在执行预生成步骤:
+删除D:\GIT\ETROLPROJECT\分输站\$GEN$\Resource\$TASK00$.CRD
+删除D:\GIT\ETROLPROJECT\分输站\$GEN$\Resource\BuildLog.txt
+删除D:\GIT\ETROLPROJECT\分输站\$GEN$\Resource\com1tx.CRD
+删除D:\GIT\ETROLPROJECT\分输站\$GEN$\Resource\com1tx.INC
+删除D:\GIT\ETROLPROJECT\分输站\$GEN$\Resource\com1tx.OBJ
+删除D:\GIT\ETROLPROJECT\分输站\$GEN$\Resource\dianjiare.CRD
+删除D:\GIT\ETROLPROJECT\分输站\$GEN$\Resource\dianjiare.INC
+删除D:\GIT\ETROLPROJECT\分输站\$GEN$\Resource\dianjiare.OBJ
+删除D:\GIT\ETROLPROJECT\分输站\$GEN$\Resource\pceData.txt
+删除D:\GIT\ETROLPROJECT\分输站\$GEN$\Resource\pceSegs.txt
+删除D:\GIT\ETROLPROJECT\分输站\$GEN$\Resource\pceVars.txt
+删除D:\GIT\ETROLPROJECT\分输站\$GEN$\Resource\pceVars.txt.xml
+删除D:\GIT\ETROLPROJECT\分输站\$GEN$\Resource\RESOURCE.bpd
+删除D:\GIT\ETROLPROJECT\分输站\$GEN$\Resource\Resource.PCD
+删除D:\GIT\ETROLPROJECT\分输站\$GEN$\Resource\RX.INC
+删除D:\GIT\ETROLPROJECT\分输站\$GEN$\Resource\RX.OBJ
+删除D:\GIT\ETROLPROJECT\分输站\$GEN$\Resource\rx1.CRD
+删除D:\GIT\ETROLPROJECT\分输站\$GEN$\Resource\rx1.INC
+删除D:\GIT\ETROLPROJECT\分输站\$GEN$\Resource\rx1.OBJ
+
+正在创建依从列表(dependency list): 
+D:\git\etrolProject\分输站\com1tx.POE
+D:\git\etrolProject\分输站\com1tx.POE(2,34,18): E: S3026: 未声明的指示符。
+D:\git\etrolProject\分输站\com1tx.POE(2,35,18): E: S3026: 未声明的指示符。
+D:\git\etrolProject\分输站\com1tx.POE(2,36,18): E: S3026: 未声明的指示符。
+D:\git\etrolProject\分输站\com1tx.POE(2,37,18): E: S3026: 未声明的指示符。
+D:\git\etrolProject\分输站\com1tx.POE(2,38,18): E: S3026: 未声明的指示符。
+5 错误, 0 警告 - D:\git\etrolProject\分输站\com1tx.POE.
+
+D:\git\etrolProject\分输站\rx1.POE
+D:\git\etrolProject\分输站\rx1.POE(2,52,18): E: S3026: 未声明的指示符。
+D:\git\etrolProject\分输站\rx1.POE(2,53,18): E: S3026: 未声明的指示符。
+D:\git\etrolProject\分输站\rx1.POE(2,54,18): E: S3026: 未声明的指示符。
+D:\git\etrolProject\分输站\rx1.POE(2,55,18): E: S3026: 未声明的指示符。
+D:\git\etrolProject\分输站\rx1.POE(2,56,18): E: S3026: 未声明的指示符。
+D:\git\etrolProject\分输站\rx1.POE(2,63,17): E: S3026: 未声明的指示符。
+D:\git\etrolProject\分输站\rx1.POE(2,65,15): E: S3026: 未声明的指示符。
+D:\git\etrolProject\分输站\rx1.POE(2,69,15): E: S3026: 未声明的指示符。
+D:\git\etrolProject\分输站\rx1.POE(2,73,11): E: S3026: 未声明的指示符。
+D:\git\etrolProject\分输站\rx1.POE(2,77,13): E: S3026: 未声明的指示符。
+10 错误, 0 警告 - D:\git\etrolProject\分输站\rx1.POE.
+
+D:\git\etrolProject\分输站\dianjiare.POE
+D:\git\etrolProject\分输站\dianjiare.POE(2,54,18): E: S3026: 未声明的指示符。
+D:\git\etrolProject\分输站\dianjiare.POE(2,55,18): E: S3026: 未声明的指示符。
+D:\git\etrolProject\分输站\dianjiare.POE(2,56,18): E: S3026: 未声明的指示符。
+D:\git\etrolProject\分输站\dianjiare.POE(2,57,18): E: S3026: 未声明的指示符。
+D:\git\etrolProject\分输站\dianjiare.POE(2,58,18): E: S3026: 未声明的指示符。
+5 错误, 0 警告 - D:\git\etrolProject\分输站\dianjiare.POE.
+
+20 错误, 0 警告.
+
+总数:
+20 错误(s) 0 警告(s)
